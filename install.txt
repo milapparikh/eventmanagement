@@ -1,0 +1,23 @@
+Installation Step.
+
+Step 1. Use following command to your project directory for git clone the repository.
+=>git clone https://github.com/milapparikh/eventmanagement.git
+
+Step 2. Execute following command for install dependency successfully.
+=>composer install
+
+Step 3. Open following file and add the database name and database authentications details.
+=>Your Project Directory > .env
+Require to set following details.
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=eventmanagement
+DB_USERNAME=root
+DB_PASSWORD=
+
+Step 4. Execute following command to create database migrations.
+=>php artisan migrate
+
+Step 5. Execute following command to store preload data in database.
+=>php artisan migrate:fresh --seed
