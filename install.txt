@@ -20,4 +20,5 @@ Step 4. Execute following command to create database migrations.
 =>php artisan migrate
 
 Step 5. Execute following command to store preload data in database.
+=>composer dump-autoload
 =>php artisan migrate:fresh --seed

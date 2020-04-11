@@ -12,17 +12,14 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-/*
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('login', 'API\UserController@login');		//users and admin login
+Route::post('events', 'API\EventController@eventslists');	//Listing of all events to anyone
 
-*/
-
-Route::post('login', 'API\UserController@login');
-//Route::post('register', 'API\UserController@register');
-
-
-Route::group(['middleware' => 'auth:api'], function(){
-	Route::post('register', 'API\UserController@register');
+Route::group(['middleware' => ['auth:api','adminauth']], function(){
+	Route::post('register', 'API\UserController@register');		//Only admin can create users
+	Route::post('eventcreate', 'API\EventController@store');
 	//Route::post('details', 'API\UserController@details');
 });
+
+
+
