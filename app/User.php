@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 
 use Laravel\Passport\HasApiTokens;
 use App\Role;
-
+use App\Comment;
 
 class User extends Authenticatable
 {
@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }   
+
+    public function comment()
+    {
+        return $this->hasOne(Comment::class);
+    }
 }

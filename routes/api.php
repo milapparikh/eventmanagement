@@ -19,7 +19,12 @@ Route::group(['middleware' => ['auth:api','adminauth']], function(){
 	Route::post('register', 'API\UserController@register');		//Only admin can create users
 	Route::post('eventcreate', 'API\EventController@store');
 	//Route::post('details', 'API\UserController@details');
+	Route::get('categoryEventList/{category_id}/category', 'API\categoryController@categoryEvent');
 });
 
+
+Route::group(['middleware' => ['auth:api']], function(){
+	Route::post('commentcreate', 'API\CommentController@store');
+});
 
 

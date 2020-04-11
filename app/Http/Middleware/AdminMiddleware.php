@@ -12,6 +12,7 @@ class AdminMiddleware
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+     * @return \Illuminate\Http\Response
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -21,7 +22,10 @@ class AdminMiddleware
 
         if($role->name == 'admin')
             return $next($request);
-        else
+        else{
+            //return response()->json('Invalid Token', 401);
+            //return response()->json(['error' => 'Unauthenticated.'], 401);
             return response('Unauthorized Action', 403);
+        }
     }
 }

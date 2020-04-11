@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Category;
+use App\Comment;
 
 class Event extends Model
 {
@@ -21,6 +22,12 @@ class Event extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Event::class);
+        return $this->belongsToMany(Category::class);
     }       
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 }
