@@ -10,10 +10,10 @@ use App\User;
 use Illuminate\Support\Facades\Auth; 
 use Validator;
 
-class commentController extends Controller
+class CommentController extends Controller
 {
-    public $successStatus = 200;
-
+    private $successStatus = 200;
+    private $validationStatus = 400;
     /**
      * Store a newly created resource in storage.
      *
@@ -33,11 +33,11 @@ class commentController extends Controller
 		$input['user_id'] = $user->id;
 
         if($validator->fails()){
-			return response()->json(['Error.'=>$validator->errors()]);
+			return response()->json(['Error.'=>$validator->errors(),'status'=>$this->validationStatus]);
         }
 
         $oComments = Comment::create($input);        
-        return response()->json(['comment_id' => $oComments->id], $this-> successStatus); 
+        return response()->json(['comment_id' => $oComments->id,'status'=>$this->successStatus]); 
     } 
 
 }

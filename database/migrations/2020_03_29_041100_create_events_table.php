@@ -17,10 +17,17 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('description');
-            $table->integer('category_id');
+            //$table->integer('category_id');
+            //$table->integer('category_id')->unsigned();
+            $table->unsignedInteger('category_id');
             $table->date('event_date');
             $table->text('location');            
             $table->timestamps();
+
+            $table->foreign('category_id')
+                ->references('id')->on('categorys')
+                ->onDelete('cascade')
+                ;
         });
     }
 
