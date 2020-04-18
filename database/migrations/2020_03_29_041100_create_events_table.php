@@ -15,13 +15,12 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('category_id');
+            $table->unsignedInteger('location_id');          
             $table->string('title');
             $table->text('description');
-            //$table->integer('category_id');
-            //$table->integer('category_id')->unsigned();
-            $table->unsignedInteger('category_id');
             $table->date('event_date');
-            $table->text('location');            
+            //$table->text('location');  
             $table->timestamps();
 
             $table->foreign('category_id')

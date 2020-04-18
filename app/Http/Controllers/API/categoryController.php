@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
-use Validator;
+use Validator; 
 use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
@@ -106,16 +106,6 @@ class CategoryController extends Controller
      */
     public function delete(Request $request,$id)
     {
-        $input = $request->all();
-       /* $validator = Validator::make($input, [
-            'id' => 'required'
-        ]);
-
-        if($validator->fails()){
-            return response()->json(['Error.'=>$validator->errors(),'status'=>$this->validationStatus]);
-        }
-        */
-
         Category::findOrFail($id)->delete();
         return response()->json(['data'=>'Category deleted successfully.','status'=>$this->successStatus]); 
     }

@@ -40,4 +40,20 @@ class CommentController extends Controller
         return response()->json(['comment_id' => $oComments->id,'status'=>$this->successStatus]); 
     } 
 
+
+    /**
+     * get all comments by events id
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function comments(Request $request,$event_id)
+    {
+     /*   $oComments = Event::leftJoin('comments', 'events.id', '=', 'comments.event_id')
+           ->select('events.*', 'comments.*')
+           ->where('events.id',$event_id)
+           ->get();
+
+        return response()->json(['data'=>$oEvents,'status'=>$this->successStatus]);
+   */ }
 }

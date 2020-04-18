@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
 		$this->call(UserTableSeeder::class);
         // Category insert
         $this->call(CategoryTableSeeder::class);
+        // Location insert
+        $this->call(LocationTableSeeder::class);
         // Event inserts
         $this->call(EventTableSeeder::class);
     }
