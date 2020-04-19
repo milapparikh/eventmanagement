@@ -23,3 +23,13 @@ Require software and Tools
 Laravel >= 6.0 version
 Php >= 7.0 version
 mysql >= 5.0
+
+8. Following are the users credentials for test Rest APIs.
+==>SuperAdmin Users
+admin@gmail.com / Admin@123
+
+==>Registered Users
+test@gmail.com / Test@123
+
+9. Postman API available as following name.
+EventManagement.postman_collection.json
