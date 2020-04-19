@@ -16,14 +16,14 @@ Route::post('login', 'API\UserController@login');		//users and admin login
 
 Route::post('events', 'API\EventController@eventslists');	//Listing of all events to anyone
 Route::get('events/{id}/details', 'API\EventController@details');	//Listing of all events to anyone
-Route::post('events/search', 'API\EventController@search');	//Apply filters on events
 
-
-Route::get('{event_id}/comments', 'API\CommentController@comments');
+Route::get('{event_id}/comments', 'API\CommentController@comments');	//display all comments to any one
 
 Route::group(['middleware' => ['auth:api']], function(){
 	Route::post('commentcreate', 'API\CommentController@store');
 	//Route::get('{event_id}/comments', 'API\CommentController@comments');
+
+	Route::post('events/search', 'API\EventController@search');	//Apply filters on events admin nd user can accss
 
 	//Following are only 
 	Route::group(['middleware' => ['adminauth']], function(){
@@ -44,11 +44,11 @@ Route::group(['middleware' => ['auth:api']], function(){
 		Route::put('categorys/{id}', 'API\CategoryController@update');			//For update all category
 		Route::delete('{id}/category', 'API\CategoryController@delete');	//For delete category
 
-
 		//Event Crud Operations
 		Route::post('eventcreate', 'API\EventController@store');	//Create Event
 		Route::post('event/{id}', 'API\EventController@update');			//For update all category
 		Route::post('delete/{id}/event', 'API\EventController@delete');	//For delete event
+
 	});
 });
 

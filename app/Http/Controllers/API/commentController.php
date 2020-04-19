@@ -15,7 +15,7 @@ class CommentController extends Controller
     private $successStatus = 200;
     private $validationStatus = 400;
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created comments.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -49,11 +49,11 @@ class CommentController extends Controller
      */
     public function comments(Request $request,$event_id)
     {
-     /*   $oComments = Event::leftJoin('comments', 'events.id', '=', 'comments.event_id')
+        $oComments = Event::leftJoin('comments', 'events.id', '=', 'comments.event_id')
            ->select('events.*', 'comments.*')
            ->where('events.id',$event_id)
            ->get();
 
-        return response()->json(['data'=>$oEvents,'status'=>$this->successStatus]);
-   */ }
+        return response()->json(['data'=>$oComments,'status'=>$this->successStatus]);
+    }
 }

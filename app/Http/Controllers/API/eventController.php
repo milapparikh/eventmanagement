@@ -27,7 +27,7 @@ class EventController extends Controller
 
         $validator = Validator::make($input, [
             'category_name' => 'required|exists:categorys,name',
-            'city_name' => 'required|exists:locatons,city'
+            'city_name' => 'required|exists:locatons,city',
             'title' => 'required|string|max:150|regex:/^[A-Za-z0-9\ \s]+$/',
             'description' => 'required|string|max:150|regex:/^[A-Za-z0-9\ \s]+$/',
             'event_date' => 'required|date|date_format:Y-m-d',	
@@ -146,22 +146,29 @@ class EventController extends Controller
     */ 
     public function search(Request $request) 
     {   
-        /*
-        $input = $request->all();
+        $oEvent = Event::select('events.*', 'categorys.name as c_name', 'locations.city as l_city');
+        $oEvent->leftJoin('categorys', 'categorys.id', '=', 'events.category_id');
+        $oEvent->leftJoin('locations', 'locations.id', '=', 'events.location_id');
 
-        $validator = Validator::make($input, [
-            'title' => 'required_without_all:category_name,event_date,location',
-            'category_name' => 'required_without_all:title,event_date,location',
-            'event_date' => 'required_without_all:category_name,title,location',   
-            'location' => 'required_without_all:category_name,event_date,title'
-        ]);
-       
-        if($validator->fails()){
-            return response()->json(['Error.'=>$validator->errors(),'status'=>$this->validationStatus]);
+        if ($request->has('name')) {
+            $oEvent->where('title',$request->name);
         }
 
-        return response()->json(['data'=>$oEvents,'status'=>$this->successStatus]);
-        */
+        if ($request->has('date')) {
+            $oEvent->where('event_date',$request->date);
+        }
+
+        if ($request->has('category_name')) {                        
+            $oEvent->where('categorys.name',$request->category_name);
+        }
+
+        if ($request->has('city_name')) {            
+            $oEvent->where('locations.city',$request->city_name);
+        }
+        
+        $aEventData = $oEvent->get();
+
+        return response()->json(['data'=>$aEventData,'status'=>$this->successStatus]);
     }
 
 }

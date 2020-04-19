@@ -1,0 +1,561 @@
+{
+	"variables": [],
+	"info": {
+		"name": "EventManagement",
+		"_postman_id": "271abf2b-dd75-fad2-ab7a-8d5a0cd08875",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"description": "",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/register",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {TOKEN}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "{EMAIL}",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{PASSWORD}",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "c_password",
+									"value": "{CONFIRM_PASSWORD}",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "{NAME}",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/login",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Admin@123",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"description": "",
+			"item": [
+				{
+					"name": "CategoryNameEventsCounts",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/categoryEventList/4/category",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {TOKEN}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "ListAllCategory",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/lists/category",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {TOKEN}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "aaaaaaaaa",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreateCategory",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/categorys",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {TOKEN}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "ListAllCategory",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/lists/category",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {TOKEN}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCategory",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/category/{ID}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {TOKEN}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCategory",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/{ID}/category",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {TOKEN}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Event",
+			"description": "",
+			"item": [
+				{
+					"name": "ListEvent",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/events",
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreateEvent",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/eventcreate",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {TOKEN}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "category_name",
+									"value": "",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "event_date",
+									"value": "",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "city_name",
+									"value": "",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteEvent",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/delete/{ID}/event",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {TOKEN}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateEvent",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/event/7",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {TOKEN}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "test",
+									"type": "text",
+									"description": ""
+								},
+								{
+									"key": "description",
+									"value": "test",
+									"type": "text",
+									"description": ""
+								},
+								{
+									"key": "category_name",
+									"value": "NewCategoryTemporary",
+									"type": "text",
+									"description": ""
+								},
+								{
+									"key": "event_date",
+									"value": "2020-05-21",
+									"type": "text",
+									"description": ""
+								},
+								{
+									"key": "city_name",
+									"value": "ahmedabad",
+									"type": "text",
+									"description": ""
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "EventDetailsById",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/events/{ID}/details",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "FilterEvent",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/events/search",
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Location",
+			"description": "",
+			"item": [
+				{
+					"name": "EventListByLocation",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/lists/location",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {TOKEN}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteLocation",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/{LOCATION_ID}/location",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {TOKEN}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "LocationsWiseEventList",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/locationEventList",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {TOKEN}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "2",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreateLocation",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/locations",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {TOKEN}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "city",
+									"value": "vijapur",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateLocation",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/locations/{ID}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {TOKEN}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "city",
+									"value": "Veejapur",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"description": "",
+			"item": [
+				{
+					"name": "CreateComment",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/commentcreate",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {TOKEN}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "event_id",
+									"value": "4",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "comment",
+									"value": "my other user s comments",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetCommentsByEventID",
+					"request": {
+						"url": "http://localhost/eventmanagement/public/api/{EVENT_ID}/comments",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
