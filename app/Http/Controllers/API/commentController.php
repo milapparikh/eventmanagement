@@ -9,11 +9,10 @@ use App\Event;
 use App\User; 
 use Illuminate\Support\Facades\Auth; 
 use Validator;
+use Illuminate\Http\Response;
 
 class CommentController extends Controller
 {
-    private $successStatus = 200;
-    private $validationStatus = 400;
     /**
      * Store a newly created comments.
      *
@@ -33,11 +32,11 @@ class CommentController extends Controller
 		$input['user_id'] = $user->id;
 
         if($validator->fails()){
-			return response()->json(['Error.'=>$validator->errors(),'status'=>$this->validationStatus]);
+			return response()->json(['status'=>400,'Error.'=>$validator->errors()], Response::HTTP_BAD_REQUEST);
         }
 
         $oComments = Comment::create($input);        
-        return response()->json(['comment_id' => $oComments->id,'status'=>$this->successStatus]); 
+        return response()->json(['status'=>200,'data' => $oComments], Response::HTTP_OK);
     } 
 
 
@@ -54,6 +53,6 @@ class CommentController extends Controller
            ->where('events.id',$event_id)
            ->get();
 
-        return response()->json(['data'=>$oComments,'status'=>$this->successStatus]);
+        return response()->json(['status'=>200,'data' => $oComments], Response::HTTP_OK);
     }
 }

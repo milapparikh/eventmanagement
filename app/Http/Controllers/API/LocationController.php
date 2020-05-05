@@ -8,12 +8,10 @@ use App\Location;
 use App\Event;
 use Validator; 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 
 class LocationController extends Controller
 {
-	private $successStatus = 200;
-    private $validationStatus = 400;
-
     /**
      * create locations
      *
@@ -29,11 +27,11 @@ class LocationController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json(['Error.'=>$validator->errors(),'status'=>$this->validationStatus]);
+            return response()->json(['status'=>400,'Error.'=>$validator->errors()], Response::HTTP_BAD_REQUEST);
         }
 
         $oLocation = Location::create($input);
-        return response()->json(['data' => $oLocation,'status'=>$this->successStatus]); 
+        return response()->json(['status'=>201,'data' => $oLocation], Response::HTTP_CREATED);
     }
 
     /**
@@ -44,8 +42,8 @@ class LocationController extends Controller
      */
     public function list(Request $request)
     {
-        $oLocationList = Location::all();
-        return response()->json(['data' => $oLocationList,'status'=>$this->successStatus]); 
+        $oLocationList = Location::all(); 
+        return response()->json(['status'=>200,'data' => $oLocationList], Response::HTTP_OK);
     }
 
     /**
@@ -64,13 +62,12 @@ class LocationController extends Controller
 
 
         if($validator->fails()){
-            return response()->json(['Error.'=>$validator->errors(),'status'=>$this->validationStatus]);
+            return response()->json(['status'=>400,'Error.'=>$validator->errors()], Response::HTTP_BAD_REQUEST);
         }
 
         $oLocation = Location::findOrFail($id);
         $oLocation->update($request->all());
-
-        return response()->json(['location_id'=>$oLocation->id,'data'=>'Location updated successfully.','status'=>$this->successStatus]); 
+        return response()->json(['status'=>200,'location_id'=>$oLocation->id,'data'=>'Location updated successfully.'], Response::HTTP_OK);
     }
 
     /** 
@@ -85,12 +82,10 @@ class LocationController extends Controller
 
         if($eventListCount == 0){
 	        Location::findOrFail($id)->delete();
-	        return response()->json(['data'=>'Location deleted successfully.','status'=>$this->successStatus]);
+            return response()->json(['status'=>200,'data'=>'Location deleted successfully.'], Response::HTTP_OK); 
         }
         else
-        {
-        	return response()->json(['data'=>'Location cannot deleted.','status'=>$this->successStatus]);
-        }
+            return response()->json(['status'=>400,'Error.'=>'Location cannot deleted.'], Response::HTTP_BAD_REQUEST);
     }
 
     /**
@@ -108,7 +103,7 @@ class LocationController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json(['Error.'=>$validator->errors(),'status'=>$this->validationStatus]);
+            return response()->json(['status'=>400,'Error.'=>$validator->errors()], Response::HTTP_BAD_REQUEST);
         }
 
         $oLocationsEvents = DB::table('locations')
@@ -118,6 +113,6 @@ class LocationController extends Controller
                 ->groupBy('locations.city')
                 ->get();
 
-         return response()->json(['data' => $oLocationsEvents,'status'=>$this->successStatus]); 
+        return response()->json(['status'=>200,'data' => $oLocationsEvents], Response::HTTP_OK);
     }
 }

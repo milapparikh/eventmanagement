@@ -5,11 +5,17 @@ use App\Http\Controllers\Controller;
 use App\User; 
 use App\Role;
 
+use Illuminate\Http\Response;
+
+
 use Illuminate\Support\Facades\Auth; 
 use Validator;
 class UserController extends Controller 
 {
-public $successStatus = 200;
+    public $createdStatus = 201;
+    public $successStatus = 200;
+    public $unAuthorisedStatus = 401;
+
 /** 
      * login api 
      * 
@@ -19,10 +25,11 @@ public $successStatus = 200;
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){ 
             $user = Auth::user(); 
             $success['token'] =  $user->createToken('MyApp')-> accessToken; 
-            return response()->json(['success' => $success], $this-> successStatus); 
+            return response()->json(['status' => '200','success' => $success], Response::HTTP_OK); 
         } 
         else{ 
-            return response()->json(['error'=>'Unauthorised'], 401); 
+            return response()->json(['status' => '401',
+                'error'=>'Unauthorised'], Response::HTTP_UNAUTHORIZED );  
         } 
     }
 /** 
@@ -40,7 +47,7 @@ public $successStatus = 200;
         ]);
 
         if ($validator->fails()) { 
-            return response()->json(['error'=>$validator->errors()], 401);            
+            return response()->json(['status' => '401','error'=>$validator->errors()], Response::HTTP_UNAUTHORIZED);            
         }
 
         $input = $request->all(); 
@@ -54,17 +61,18 @@ public $successStatus = 200;
         $success['token'] =  $user->createToken('MyApp')-> accessToken; 
         $success['name'] =  $user->name;
         
-        return response()->json(['success'=>$success], $this-> successStatus); 
+        return response()->json(['status' => '201','success'=>$success], Response::HTTP_CREATED ); 
     }
     
     /** 
      * details api 
      * 
      * @return \Illuminate\Http\Response 
-     */ 
+     */
+     /* 
     public function details() 
     { 
-        $user = Auth::user(); 
-        return response()->json(['success' => $user], $this-> successStatus); 
-    } 
+     //   $user = Auth::user(); 
+     //   return response()->json(['success' => $user], $this-> successStatus); 
+    } */
 }

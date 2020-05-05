@@ -8,13 +8,10 @@ use App\Event;
 use App\Category;
 use App\Location;
 use Validator;
-//use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Response;
 
 class EventController extends Controller
 {
-    private $successStatus = 200;
-    private $validationStatus = 400;
-
     /** 
      * Store a newly created resource in storage.
      *
@@ -40,11 +37,11 @@ class EventController extends Controller
         $input['location_id'] = $oLocation->id;
 
         if($validator->fails()){
-			return response()->json(['Error.'=>$validator->errors(),'status'=>$this->validationStatus]);
+			return response()->json(['status'=>400,'Error.'=>$validator->errors()], Response::HTTP_BAD_REQUEST);
         }
 
         $oEvents = Event::create($input);        
-        return response()->json(['data' => $oEvents,'status'=>$this->successStatus]); 
+        return response()->json(['status'=>201,'data' => $oEvents], Response::HTTP_CREATED);
     } 
 
 
@@ -56,7 +53,7 @@ class EventController extends Controller
     public function eventslists() 
     {	
     	$events = Event::all();
-	    return response()->json(['data' => $events], $this-> successStatus); 
+        return response()->json(['status'=>200,'data' => $events], Response::HTTP_OK);
 	}
 
     /**
@@ -78,7 +75,7 @@ class EventController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json(['Error.'=>$validator->errors(),'status'=>$this->validationStatus]);
+            return response()->json(['status'=>400,'Error.'=>$validator->errors()], Response::HTTP_BAD_REQUEST);
         }
 
     
@@ -94,8 +91,8 @@ class EventController extends Controller
 
 
         $oEvents = Event::findOrFail($id);
-        $oEvents->update($input);    
-        return response()->json(['event_id' => $oEvents->id,'data'=>'Event updated successfully.','status'=>$this->successStatus]);
+        $oEvents->update($input);   
+        return response()->json(['status'=>200,'event_id' => $oEvents->id,'data'=>'Event updated successfully.'], Response::HTTP_OK);
     }
 
 
@@ -113,7 +110,7 @@ class EventController extends Controller
            ->where('events.id',$id)
            ->get();
 
-        return response()->json(['data'=>$oEvents,'status'=>$this->successStatus]);
+        return response()->json(['status'=>200,'data' => $oEvents], Response::HTTP_OK);
     }
 
 
@@ -132,11 +129,11 @@ class EventController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json(['Error.'=>$validator->errors(),'status'=>$this->validationStatus]);
+           return response()->json(['status'=>400,'Error.'=>$validator->errors()], Response::HTTP_BAD_REQUEST);
         }
 
         Event::find($id)->delete();
-        return response()->json(['data' => 'Event deleted successfully.','status'=>$this->successStatus]); 
+        return response()->json(['status'=>200,'data'=>'Event deleted successfully.'], Response::HTTP_OK); 
     }
 
     /** 
@@ -167,8 +164,7 @@ class EventController extends Controller
         }
         
         $aEventData = $oEvent->get();
-
-        return response()->json(['data'=>$aEventData,'status'=>$this->successStatus]);
+        return response()->json(['status'=>200,'data'=>$aEventData], Response::HTTP_OK); 
     }
 
 }
